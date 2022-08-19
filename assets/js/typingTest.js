@@ -15,9 +15,6 @@ var notesList = $('ul#notes');
 var noteContent = '';
 
 // Get all notes from previous sessions and display them.
-var notes = getAllNotes();
-renderNotes(notes);
-
 
 
 /*-----------------------------
@@ -30,7 +27,7 @@ renderNotes(notes);
 recognition.continuous = true;
 
 // This block is called every time the Speech APi captures a line. 
-recognition.onresult = function (event) {
+recognition.onresult = function(event) {
 
     // event is a SpeechRecognitionEvent object.
     // It holds all the lines we have captured so far. 
@@ -51,15 +48,15 @@ recognition.onresult = function (event) {
     }
 };
 
-recognition.onstart = function () {
+recognition.onstart = function() {
     instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
-recognition.onspeechend = function () {
+recognition.onspeechend = function() {
     instructions.text('You were quiet for a while so voice recognition turned itself off.');
 }
 
-recognition.onerror = function (event) {
+recognition.onerror = function(event) {
     if (event.error == 'no-speech') {
         instructions.text('No speech was detected. Try again.');
     };
@@ -71,7 +68,7 @@ recognition.onerror = function (event) {
       App buttons and input 
 ------------------------------*/
 
-$('#start-record-btn').on('click', function (e) {
+$('#start-record-btn').on('click', function(e) {
     if (noteContent.length) {
         noteContent += ' ';
     }
@@ -79,17 +76,17 @@ $('#start-record-btn').on('click', function (e) {
 });
 
 
-$('#pause-record-btn').on('click', function (e) {
+$('#pause-record-btn').on('click', function(e) {
     recognition.stop();
     instructions.text('Voice recognition paused.');
 });
 
 // Sync the text inside the text area with the noteContent variable.
-noteTextarea.on('input', function () {
+noteTextarea.on('input', function() {
     noteContent = $(this).val();
 })
 
-$('#save-note-btn').on('click', function (e) {
+$('#save-note-btn').on('click', function(e) {
     recognition.stop();
 
     if (!noteContent.length) {
@@ -97,22 +94,18 @@ $('#save-note-btn').on('click', function (e) {
     } else {
         // Save note to localStorage.
         // The key is the dateTime with seconds, the value is the content of the note.
-        var del = confirm("Want to save ?");
-        if (del) {
-            saveNote(new Date().toLocaleString(), noteContent);
-
-            // Reset variables and update UI.
-            noteContent = '';
-            renderNotes(getAllNotes());
-            noteTextarea.val('');
-            instructions.text('Note saved successfully.');
-        }
+        // Reset variables and update UI.
+        checkspeech(noteContent);
+        noteContent = '';
+       
+        noteTextarea.val('');
+        instructions.text('Note saved successfully.');
     }
 
 })
 
 
-notesList.on('click', function (e) {
+notesList.on('click', function(e) {
     e.preventDefault();
     var target = $(e.target);
 
@@ -133,70 +126,60 @@ notesList.on('click', function (e) {
 
 
 /*-----------------------------
-      Speech Synthesis 
-------------------------------*/
-
-function readOutLoud(message) {
-    var speech = new SpeechSynthesisUtterance();
-
-    // Set the text and voice attributes.
-    speech.text = message;
-    speech.volume = 1;
-    speech.rate = 1;
-    speech.pitch = 3;
-
-    window.speechSynthesis.speak(speech);
-}
-
-
-
-/*-----------------------------
       Helper Functions 
 ------------------------------*/
 
-function renderNotes(notes) {
+function checkspeech(note) {
     var html = '';
-    if (notes.length) {
-        notes.forEach(function (note) {
-            html += `<li class="note">
+    console.log(note);
+    if(note==="this is human computer interaction project")
+    {
+        html += `<div class="note">
         <p class="header">
-          <span class="date">${note.date}</span>
-          <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
-          <a href="#" class="delete-note" title="Delete">Delete</a>
+        <h4 class="content" style="color: #8ac000;">Correct Answer</h4>
         </p>
-        <p class="content">${note.content}</p>
-      </li>`;
-        });
-    } else {
-        html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+        </div>`;
+        readOutLoud('correct answer')
+    }
+    else{
+        html += `<div class="note">
+        <p class="header">
+        <h4 class="content" style="color: red;">Wrong Answer</h4>
+        </p>
+        </div>`;
+        readOutLoud('wrong answer')
     }
     notesList.html(html);
 }
 
+function readOutLoud(message,check=false) {
+    var speech = new SpeechSynthesisUtterance();
 
-function saveNote(dateTime, content) {
-    localStorage.setItem('note-' + dateTime, content);
-}
+    // Set the text and voice attributes.
+    speech.text = message;
+    speech.volume = 3;
+    speech.rate = 1;
+    speech.pitch = 3;
 
-
-function getAllNotes() {
-    var notes = [];
-    var key;
-    for (var i = 0; i < localStorage.length; i++) {
-        key = localStorage.key(i);
-
-        if (key.substring(0, 5) == 'note-') {
-            notes.push({
-                date: key.replace('note-', ''),
-                content: localStorage.getItem(localStorage.key(i))
-            });
-        }
+    window.speechSynthesis.speak(speech);
+    if(message=="welcome to Sahaara, Listening and Typing Test")
+    {
+        speech.text = "Move to the left section, to listen the text";
+        window.speechSynthesis.speak(speech);
     }
-    return notes;
+}
+function readOutText(message) {
+    var speech = new SpeechSynthesisUtterance();
+
+    // Set the text and voice attributes.
+    speech.text = message;
+    speech.volume = 3;
+    speech.rate = 0.2;
+    speech.pitch = 3;
+
+    window.speechSynthesis.speak(speech);
+    speech.rate = 1;
+    speech.text = "Please type in the text box";
+    window.speechSynthesis.speak(speech);
 }
 
-
-function deleteNote(dateTime) {
-    var del = confirm("Want to delete?");
-    if (del) { localStorage.removeItem('note-' + dateTime); }
-}

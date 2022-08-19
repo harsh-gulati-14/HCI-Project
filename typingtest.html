@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sahaara - Listen+Type Test</title>
+    <meta name="description" content="A Voice Note App that allows you to take voice and/or text notes and play them back.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Bootstrap CDN CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-0Mou2qXGeXK7k/Ue/a1hspEVcEP2zCpoQZw8/MPeUgISww+VmDJcy2ri9tX0a6iy" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container-fluid align-center box">
+        <h1>Sahaara</h1>
+        <div id="container">
+            <div class="tagline"> 
+                Listening and Typing Test
+            </div>
+            <div class="speakerLogo tagline">
+                <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutLoud('welcome to Sahaara, Listening and Typing Test')"/>
+            </div>
+        
+        </div>
+        <hr>
+        <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+        <div class="app">
+            <div class="row">
+               
+                <div class="col-md-6 align-center">
+
+                    <div id="container">
+                        <div class="tagline"> 
+                            <h3>Listen these text and type your answer</h3>
+                        </div>
+                    </div>
+
+                   
+                    <ul id="notes">
+                        <li>
+                            <div class="container box1">
+                                <div class="tagline"> 
+                                    <u><h3>Text</h3></u>
+                                </div>
+                                <div class="speakerLogo tagline">
+                                    <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutText('This is human computer interaction project')"/>
+                                </div>
+                            
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 align-center">
+                    <h3>Input your answer</h3>
+                    <div class="input-single">
+                        <textarea id="note-textarea" placeholder="Type Here" rows="6" onclick="readOutLoud('Start typing here ')"></textarea>
+                    </div>
+                    <button id="save-note-btn" class="btn-info" title="Save Note" onclick="readOutLoud('Checking your answer',true)">Check Answer</button>
+                    <p id="recording-instructions"></p>
+                   
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /app -->
+    </div>
+    <!-- /footer -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/typingTest.js"></script>
+
+</body>
+
+</html>

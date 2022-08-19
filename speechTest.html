@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sahaara - Speak+Read Test</title>
+    <meta name="description" content="A Voice Note App that allows you to take voice and/or text notes and play them back.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Bootstrap CDN CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-0Mou2qXGeXK7k/Ue/a1hspEVcEP2zCpoQZw8/MPeUgISww+VmDJcy2ri9tX0a6iy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+    <div class="container-fluid align-center box">
+        <h1>Sahaara</h1>
+        <div id="container">
+            <div class="tagline" id="tag"> 
+               Speaking and Reading Test
+            </div>
+            <div class="speakerLogo tagline">
+                <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutLoud('welcome to Sahaara, Speaking and Reading Test','tag')"/>
+            </div>
+        
+        </div>
+        <hr>
+        <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+        <div class="app">
+            <div class="row">
+               
+                <div class="col-md-6 align-center">
+
+                    <div id="container">
+                        <div class="tagline"> 
+                            <h3 id="read"><strong>Read this line to test you reading and speaking skills</strong></h3>
+                        </div>
+                        <div class="speakerLogo tagline">
+                            <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutLoud('Read the below Lines to test you reading and speaking  skills, click on start recognition to start Speaking','read')"/>
+                        </div>
+                    
+                    </div>
+
+                   
+                    <ul id="notes">
+                        <li>
+                            <h4 class="no-notes"> -> hello how are you</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 align-center">
+                    <h3>Add New Voice Note</h3>
+                    <div class="input-single">
+                        <textarea id="note-textarea" placeholder="Click on start recognition" rows="6" onclick="readOutLoud('Click on start recognition ')"></textarea>
+                    </div>
+                    <button id="start-record-btn" class="btn-success w3-hover-black" title="Start Recording" onclick="readOutLoud('start recognition, Please allow Microphone access')">Start Recognition</button>
+                    <button id="pause-record-btn" class="btn-warning" title="Pause Recording" onclick="readOutLoud('pausing recognition')">Pause Recognition</button>
+                    <button id="save-note-btn" class="btn-info" title="Save Note" onclick="readOutLoud('Checking your answer')">Check Recognition</button>
+                    <p id="recording-instructions"></p>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /app -->
+    </div>
+    <!-- /footer -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/speechtest.js"></script>
+
+</body>
+
+</html>

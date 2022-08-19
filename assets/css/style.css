@@ -3,6 +3,19 @@ ul {
     padding: 0;
 }
 
+.tagline{
+    display:inline;
+}
+.speakerlogo{
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+
+}
+.box1{
+    border-width: 20px;
+    border-color: #1da7da;
+}
 p {
     color: #444;
 }
@@ -10,6 +23,12 @@ p {
 button {
     margin-bottom: 20px;
     padding: 10px 10px;
+}
+
+.box {
+    margin-top: 40px;
+    padding: 10px 10px;
+    /* background-color: yellow; */
 }
 
 button:focus {
