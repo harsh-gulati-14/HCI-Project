@@ -6,6 +6,9 @@ ul {
 .tagline{
     display:inline;
 }
+.bgnav{
+    background-color: #444;
+}
 .speakerlogo{
     width: 40px;
     height: 40px;
@@ -26,7 +29,7 @@ button {
 }
 
 .box {
-    margin-top: 40px;
+    margin-top: 100px;
     padding: 10px 10px;
     /* background-color: yellow; */
 }
