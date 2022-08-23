@@ -140,7 +140,7 @@ function checkspeech(note) {
         <h4 class="content" style="color: #8ac000;">Correct Answer</h4>
         </p>
         </div>`;
-        readOutLoud('correct answer')
+        readOutNon('correct answer')
     }
     else{
         html += `<div class="note">
@@ -148,11 +148,25 @@ function checkspeech(note) {
         <h4 class="content" style="color: red;">Wrong Answer</h4>
         </p>
         </div>`;
-        readOutLoud('wrong answer')
+        readOutNon('wrong answer')
     }
     notesList.html(html);
 }
+function readOutNon(message) {
+    console.log(message)
+    var speech = new SpeechSynthesisUtterance();
 
+    // Set the text and voice attributes.
+    
+    speech.text = message;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 3;
+    console.log(speech)
+
+    window.speechSynthesis.speak(speech);
+   
+}
 function readOutLoud(message,id) {
     console.log(message)
     var speech = new SpeechSynthesisUtterance();

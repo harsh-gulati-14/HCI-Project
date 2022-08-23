@@ -45,11 +45,11 @@
     <div class="container-fluid align-center box">
         <h1>Sahaara</h1>
         <div id="container">
-            <div class="tagline"> 
+            <div class="tagline" id="tag"> 
                 Listening and Typing Test
             </div>
             <div class="speakerLogo tagline">
-                <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutLoud('welcome to Sahaara, Listening and Typing Test')"/>
+                <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutLoud('welcome to Sahaara, Listening and Typing Test','tag')"/>
             </div>
         
         </div>
@@ -71,10 +71,10 @@
                         <li>
                             <div class="container box1">
                                 <div class="tagline"> 
-                                    <u><h3>Text</h3></u>
+                                    <u><h3  id="texttag">Text</h3></u>
                                 </div>
                                 <div class="speakerLogo tagline">
-                                    <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutText('This is human computer interaction project')"/>
+                                    <img class="speakerlogo" src="assets/img/speaker.png" onclick="readOutMessage('This is human computer interaction project','texttag')"/>
                                 </div>
                             
                             </div>
@@ -84,9 +84,9 @@
                 <div class="col-md-6 align-center">
                     <h3>Input your answer</h3>
                     <div class="input-single">
-                        <textarea id="note-textarea" placeholder="Type Here" rows="6" onclick="readOutLoud('Start typing here ')"></textarea>
+                        <textarea id="note-textarea" placeholder="Type Here" rows="6" onclick="readOutText('Start typing here ')"></textarea>
                     </div>
-                    <button id="save-note-btn" class="btn-info" title="Save Note" onclick="readOutLoud('Checking your answer',true)">Check Answer</button>
+                    <button id="save-note-btn" class="btn-info" title="Save Note" onclick="readOutText('Checking your answer',true)">Check Answer</button>
                     <p id="recording-instructions"></p>
                    
             </div>

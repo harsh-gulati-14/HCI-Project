@@ -105,24 +105,6 @@ $('#save-note-btn').on('click', function(e) {
 })
 
 
-notesList.on('click', function(e) {
-    e.preventDefault();
-    var target = $(e.target);
-
-    // Listen to the selected note.
-    if (target.hasClass('listen-note')) {
-        var content = target.closest('.note').find('.content').text();
-        readOutLoud(content);
-    }
-
-    // Delete note.
-    if (target.hasClass('delete-note')) {
-        var dateTime = target.siblings('.date').text();
-        deleteNote(dateTime);
-        target.closest('.note').remove();
-    }
-});
-
 
 
 /*-----------------------------
@@ -139,7 +121,7 @@ function checkspeech(note) {
         <h4 class="content" style="color: #8ac000;">Correct Answer</h4>
         </p>
         </div>`;
-        readOutLoud('correct answer')
+        readOutText('correct answer')
     }
     else{
         html += `<div class="note">
@@ -147,12 +129,12 @@ function checkspeech(note) {
         <h4 class="content" style="color: red;">Wrong Answer</h4>
         </p>
         </div>`;
-        readOutLoud('wrong answer')
+        readOutText('wrong answer')
     }
     notesList.html(html);
 }
 
-function readOutLoud(message,check=false) {
+function readOutLoud(message,id) {
     var speech = new SpeechSynthesisUtterance();
 
     // Set the text and voice attributes.
@@ -160,13 +142,35 @@ function readOutLoud(message,check=false) {
     speech.volume = 3;
     speech.rate = 1;
     speech.pitch = 3;
-
+    document.getElementById(id).style.color = "red";
     window.speechSynthesis.speak(speech);
     if(message=="welcome to Sahaara, Listening and Typing Test")
     {
         speech.text = "Move to the left section, to listen the text";
         window.speechSynthesis.speak(speech);
     }
+    speech.onend = () => {
+        console.log("Utterance has finished being spoken after");
+        document.getElementById(id).style.color = "#1da7da";
+      }
+}
+function readOutMessage(message,id) {
+    var speech = new SpeechSynthesisUtterance();
+
+    speech.text = message;
+    speech.volume = 3;
+    speech.rate = 0.2;
+    speech.pitch = 3;
+    document.getElementById(id).style.color = "red";
+
+    window.speechSynthesis.speak(speech);
+    speech.rate = 1;
+    speech.text = "Please type in the text box";
+    window.speechSynthesis.speak(speech);
+    speech.onend = () => {
+        console.log("Utterance has finished being spoken after");
+        document.getElementById(id).style.color = "#1da7da";
+      }
 }
 function readOutText(message) {
     var speech = new SpeechSynthesisUtterance();
@@ -174,12 +178,10 @@ function readOutText(message) {
     // Set the text and voice attributes.
     speech.text = message;
     speech.volume = 3;
-    speech.rate = 0.2;
-    speech.pitch = 3;
-
-    window.speechSynthesis.speak(speech);
     speech.rate = 1;
-    speech.text = "Please type in the text box";
+    speech.pitch = 3;
+    // document.getElementById(id).style.color = "red";
+
     window.speechSynthesis.speak(speech);
 }
 
